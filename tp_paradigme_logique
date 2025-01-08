@@ -1,0 +1,35 @@
+%Faits
+homme(pierre).
+homme(marc).
+homme(paul).
+homme(jacques).
+homme(luc).
+femme(marie).
+femme(sophie).
+femme(lucie).
+femme(lisa).
+femme(julie).
+
+parent(pierre, paul).
+parent(marie, paul).
+parent(marc, sophie).
+parent(jacques, marc).
+parent(pierre, lucie).
+parent(lucie, lisa).
+parent(julie, sophie).
+parent(luc, marie).
+parent(luc, julie).
+
+%Règles
+père(X, Y) :- homme(X), parent(X, Y).
+mère(X, Y) :- femme(X), parent(X, Y).
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+frère_soeur(X, Y) :- parent(Z, X), parent(Z, Y), X\=Y.
+oncle_tante(X, Y) :- parent(Z, Y), frère_soeur(X, Z).
+cousin(X, Y) :- parent(Z, X), frère_soeur(Z, W), parent(W, Y).
+
+longueur([], 0).
+longueur([_ | Queue], N) :- longueur(Queue, M), N is M + 1.
+
+membre(X, [X | _]).
+membre(X, [_ | T]) :- membre(X, T).
