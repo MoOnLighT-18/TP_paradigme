@@ -1,0 +1,38 @@
+# Saisie des données
+noms = []
+notes = []
+
+nb_etudiants = int(input("Combien d'étudiants souhaitez-vous saisir ? "))
+
+for i in range(nb_etudiants):
+    nom = input(f"Nom de l’étudiant {i+1} : ")
+    note = float(input(f"Note de {nom} : "))
+    noms.append(nom)
+    notes.append(note)
+
+# Calcul et affichage de la moyenne
+def calculer_moyenne(notes):
+    return sum(notes) / len(notes)
+
+moyenne = calculer_moyenne(notes)
+print(f"La moyenne de la classe est de {moyenne:.2f}.")
+
+# Affichage de la répartition des étudiants
+def afficher_repartition(noms, notes):
+    reussite = [noms[i] for i in range(len(notes)) if notes[i] >= 10]
+    echec = [noms[i] for i in range(len(notes)) if notes[i] < 10]
+    
+    print("Étudiants ayant réussi :", ", ".join(reussite))
+    print("Étudiants en échec :", ", ".join(echec))
+
+afficher_repartition(noms, notes)
+
+# Affichage de l’étudiant ayant la meilleure note
+def meilleure_note(noms, notes):
+    meilleure_note = max(notes)
+    index_meilleur = notes.index(meilleure_note)
+    nom_meilleur = noms[index_meilleur]
+    
+    print(f"L’étudiant ayant la meilleure note est {nom_meilleur} avec {meilleure_note}.")
+
+meilleure_note(noms, notes)
